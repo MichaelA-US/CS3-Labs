@@ -73,21 +73,21 @@ public class Square
 		if(getType() == EMPTY)
 		{
 			//If empty add the status
-			str += UNKNOWN;
+			return status+"";
 		}
 		else if(getType() == WALL)
 		{
-			str += "#";
+			return "#";
 		}
 		else if(getType() == START)
 		{
-			str += "S";
+			return "S";
 		}
 		else if(getType() == EXIT)
 		{
-			str += "E";
+			return "E";
 		}
-		return str;
+		return "";
 	}
 	/**
 	 * Squares are equal if they have the same ROW and COLUMN; type is not necessary.
@@ -95,6 +95,6 @@ public class Square
 	@Override
 	public boolean equals(Object obj)
 	{
-		return ((Square) obj).getRow() == getRow() && ((Square) obj).getCol() == getCol();
+		return ((Square) obj).getRow() == this.getRow() && ((Square) obj).getCol() == this.getCol();
 	}
 }
