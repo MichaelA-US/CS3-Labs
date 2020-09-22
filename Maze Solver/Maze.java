@@ -7,9 +7,8 @@ import java.util.Scanner;
 public class Maze
 {
 	private Square[][] maze;
-	private int size;
-	private int start;
-	private int exit;
+	private Square start;
+	private Square exit;
 	public Maze()
 	{
 	}
@@ -25,12 +24,12 @@ public class Maze
 				r = newFile.nextInt();
 				c = newFile.nextInt();
 				maze = new Square[r][c];
-				size = r*c;
-				for(int i = 0; i < size; i++)
+				for(int i = 0; i < maze.length; i++)
 				{
-					for(int j = 0; j < size; j++)
+					for(int j = 0; j < maze[i].length; j++)
 					{
-						maze[i][j] = maze[newFile.nextInt()][newFile.nextInt()];
+						maze[i][j] = new Square(i,j,newFile.nextInt());
+						//Find Start, Exit
 					}
 				}
 				return true;
@@ -46,29 +45,26 @@ public class Maze
 	
 	public ArrayList<Square> getNeighbors(Square s)
 	{
-		int north = 0;
-		int east = 0;
-		int south = 0;
-		int west = 0;
+		int north = s.getRow()-1; //row-1 >= 0
+		int east = s.getCol()+1; //col+1 < maze[0].length
+		int south = s.getRow()+1; //row+1 < maze.length
+		int west = s.getCol()-1; //col-1 >= 0
 		ArrayList<Square> list = new ArrayList<Square>();
-		for(int i = 0; i < size; i++)
-		{
-			for(int j = 0; j < size; j++)
-			{
-				
-			}
-		}
+		//Add to list squares
+		
 		
 	}
 	
 	public Square getStart()
 	{
-		
+		//Iterate through 2DArray and find if the square's type is equal to that  of START
+		return start;
 	}
 	
 	public Square getExit()
 	{
-		
+		//Iterate through 2DArray and find if the square's type is equal to that  of EXIT
+		return exit;
 	}
 	
 	public void reset()
@@ -79,6 +75,6 @@ public class Maze
 	@Override
 	public String toString()
 	{
-		
+		//Loop through 2DArray and add squares to string
 	}
 }
