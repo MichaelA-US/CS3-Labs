@@ -1,4 +1,8 @@
 import java.util.*;
+/**
+* This class implements multiple given test cases to test the MyStack
+* class to ensure it is working properly
+*/
 public class StackRunner 
 {
 	public static void main(String[] args)
