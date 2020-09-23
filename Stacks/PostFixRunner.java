@@ -1,3 +1,7 @@
+/**
+* This class implements multiple test cases
+* to confirm that the PostFix classs is working properly
+*/
 public class PostFixRunner
 {
 	public static void main ( String[] args )
