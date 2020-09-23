@@ -1,4 +1,8 @@
 
+/**
+* This class implements multiple test cases
+* in order to ensure the SyntaxChecker class is working properly
+*/
 public class SyntaxCheckRunner
 {
 	public static void main ( String[] args )
