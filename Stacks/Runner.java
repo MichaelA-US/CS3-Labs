@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.Stack;
 /**
 * This class implements multiple test cases and a helper method
-* to be able to test the myStack class
+* to be able to test the stack problems class
 */
 public class Runner
 {
