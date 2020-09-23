@@ -1,5 +1,9 @@
 import java.util.*;
 import java.util.Stack;
+/**
+* This class implements multiple test cases and a helper method
+* to be able to test the myStack class
+*/
 public class Runner
 {
 	public static void main (String args[])
@@ -13,6 +17,9 @@ public class Runner
 		System.out.println(test.shiftByN(makeStack(nums2), 3));
 		System.out.println(test.reverseVowels("hello how are you"));
 	}
+	/**
+	* Turns an array of nums into a stack
+	*/
 	public static Stack<Integer> makeStack(int[] nums)
 	{
 		StackProbs probs = new StackProbs();
