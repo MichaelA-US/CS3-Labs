@@ -1,31 +1,44 @@
 import java.util.EmptyStackException;
-
+/**
+ * This class implements multiple methods to recreate a replica of the Stack class
+ */
 public class MyStack implements StackADT
 {
     private Square[] stack;
     private int size;
-
+    /**
+     * Default constructor of the class
+     */
     public MyStack()
     {
-        size = 0;
+        this(10);
     }
-
+    /**
+     * Second constructor that
+     * initalized the variables and size
+     */
     public MyStack(int initCap)
     {
-        this();
         stack = new Square[initCap];
         size = initCap;
     }
-
+    /**
+     * Finds if the stack doesn't have any objects in it
+     * @return a true or false - true being if it is empty, false if not
+     */
     public boolean isEmpty()
     {
-        if(stack.length == 0)
+        if(size == 0)
         {
             return true;
         }
         return false;
     }
-
+    /**
+     * Finds the top value on the stack
+     * Throws an exception if not possible
+     * @return the value on the top
+     */
     public Square Peek()
     {
         if(isEmpty())
@@ -35,7 +48,11 @@ public class MyStack implements StackADT
         return stack[size - 1];
 
     }
-
+    /**
+     * Removes the top value and returns it; throws an exception
+     * if not possible
+     * @return the value removed
+     */
     public Square pop()
     {
         if(isEmpty())
@@ -46,7 +63,10 @@ public class MyStack implements StackADT
         size--;
         return temp;
     }
-
+    /**
+     * Adds an item to the stack
+     * @param item to add
+     */
     public void push(Square item)
     {
         if(size == stack.length)
@@ -56,33 +76,44 @@ public class MyStack implements StackADT
         stack[size] = item;
         size++;
     }
-
+    /**
+     * Doubles the capacity of the array
+     * to ensure the stack has enough space when adding items
+     */
     public void doubleCapacity()
     {
-    	Square[] tempStack = new Square[stack.length * 2];
+        Square[] tempStack = new Square[stack.length * 2];
         for(int i = 0; i < stack.length; i++)
         {
             tempStack[i] = stack[i];
         }
         stack = tempStack;
     }
+    /**
+     * Convert the stack to a string in a
+     * 'stack' like way
+     * @return the stack
+     */
     @Override
-    public String toString()
+    public String toString() //open to changes
     {
-        if(isEmpty())
+        String str = "[";
+        for (int i=size-1;i>-1;i--)
         {
-            return "[]";
-        }
-        String s = "[";
-        for(Square i: stack)
-        {
-            if(i == null)
+            if(stack[i] == null)
             {
                 break;
             }
-            s += i + ", ";
+            str+=stack[i]+",";
         }
-        return s.substring(0, s.length()-2) + "]";
+        if(size > 0)
+        {
+            return str.substring(0,str.length()-1)+"]";
+        }
+        else
+        {
+            return "[]";
+        }
     }
 
     //Advanced
@@ -90,5 +121,27 @@ public class MyStack implements StackADT
     {
         return null;
     }
-}
 
+    @Override
+    public Square peek()
+    {
+        // TODO Auto-generated method stub
+        return this.peek();
+    }
+
+    @Override
+    public int size()
+    {
+        // TODO Auto-generated method stub
+        return size;
+    }
+
+    @Override
+    public void clear()
+    {
+        // TODO Auto-generated method stub
+        stack = new Square[1];
+        size = 0;
+
+    }
+}
