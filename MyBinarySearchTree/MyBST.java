@@ -13,11 +13,7 @@ public class MyBST
 	{
 	    Integer val;
 	    BSTNode left, right;
-	    public BSTNode()
-	    {
-	    	this.val = null;
-	    	left = right = null;
-	    }
+	    
 		public BSTNode(Integer val) 
 		{
 			this.val = val;
@@ -36,12 +32,16 @@ public class MyBST
 	 */
 	public int size()
 	{
-		if(this.root == null)
+           return size(root);
+	}
+	private int size(BSTNode root)
+	{
+		if(root == null)
 		{
 			return 0;
 		}
-		//return size() + 1;
-		return 1;
+		
+		return 1 + size(root.right) + size(root.left);
 	}
 	/**
 	 * Add a node to the the tree with the value n
@@ -49,17 +49,33 @@ public class MyBST
 	 */
 	public void insert(Integer n)
 	{
-		if(this.root == null)
+            if(root == null)
+	    {
+                root = new BSTNode(n);
+		    return;
+	    }
+		insert(n, root);
+	}
+	private void insert(Integer n, BSTNode root)
+	{
+		if(n < root.val)
 		{
-			this.root = new BSTNode(n);
+	           if (root.left == null)
+		    {
+                         root.left = new BSTNode(n);
+                         return;
+                    }
+                    insert(n, node.left);
 		}
-		else if(n < this.root.left.val)
+		else
 		{
-			root.left.val = n;
-		}
-		else if(n > this.root.right.val)
-		{
-			root.right.val = n;
+                    if (root.right == null)
+		    {
+                         root.right = new BSTNode(n);
+                         return;
+                    }
+                    insert(n, node.right);
+			
 		}
 	}
 	/**
@@ -67,27 +83,22 @@ public class MyBST
 	 * @param n - the value to check for
 	 * @return - true or false depending on whether or not it is found
 	 */
-	public boolean contains(Integer n)
+	public boolean contains(Integer n) 
 	{
-		if(this.root == null)
-		{
-			return false;
-		}
-		else if(root.val == n)
-		{
-			return true;
-		}
-		else if(root.val > n)
-		{
-			//return contains(root.left.val);
-			return false;
-		}
-		else
-		{
-			//return contains(root.right.val);
-			return false;
-		}
+        return contains(root, n);
+        }
+        private boolean contains(BSTNode root, Integer n) 
+	{
+        if (root == null) 
+	{
+	 return false;
 	}
+        if (root.val.equals(n))
+	{
+        return true;
+	}
+        return contains(root.left, n) || contains(root.right, n);
+        }
 	/**
 	 * Returns the largest value in the tree,
 	 * or null if the tree is empty
@@ -95,46 +106,16 @@ public class MyBST
 	 */
 	public Integer getMax()
 	{
-		int max = 0;
-		int tmp = 0;
-		if(root == null)
-		{
-			return 0;
-		}
-		if(root != null)
-		{
-			tmp = root.val;
-			if(tmp > max)
-			{
-				max = tmp;
-				//tmp = root.right.val;
-			}
-		}
-		return max;
+
 	}
 	/**
 	 * Returns the smallest value in the tree,
 	 * or null if the tree is empty
 	 * @return
 	 */
-	public Integer getMin()
+	public Integer  getMin()
 	{
-		int min = 0;
-		int tmp = 0;
-		if(root == null)
-		{
-			return 0;
-		}
-		if(root != null)
-		{
-			tmp = root.val;
-			if(tmp < min)
-			{
-				min = tmp;
-				tmp = root.left.val;
-			}
-		}
-		return min;
+
 	}
 	/**
 	 * Delete a node in the tree with value n. Does nothing if n
