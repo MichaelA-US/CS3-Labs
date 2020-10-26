@@ -157,13 +157,32 @@ public class MyBST
 	}
 	private void delete(Integer n, BSTNode root)
 	{
-		if(root.val.equals(n))
-		{
-			if(root.right == null && root.left == null)
-			{
-				root.val = 0;
-			}
-		}
+	    if (root == null) 
+	    {
+		return null;
+	    }
+           if (root.val.equals(n)) 
+	   {
+            if (root.right != null && root.left != null) 
+	    {
+                root.val = getSuccessor(root.right);
+                return root;
+            }
+	   
+            if (root.left != null)
+	    {
+		    return node.left;
+	    }
+            if (root.right != null)
+	    { 
+		    return root.right;
+	    }
+            return null;
+        }
+        root.right = delete(n, root.right);
+        root.left = delete(n, root.left);
+        return root;
+
 		
 	}
 	public void inOrder()
