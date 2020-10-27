@@ -26,7 +26,7 @@ public class MyBST
 			return "" + this.val; 
 		}
 	}
-	private BSTNode root;
+	 BSTNode root;
 	/**
 	 * Return the number of elements in the tree
 	 * @return # of elements in tree
@@ -41,7 +41,6 @@ public class MyBST
 		{
 			return 0;
 		}
-		
 		return 1 + size(root.right) + size(root.left);
 	}
 	/**
@@ -50,12 +49,22 @@ public class MyBST
 	 */
 	public void insert(Integer n)
 	{
+    if(contains(n))
+    {
+      return;
+    }
+    else
+    {
+    //if(!contains(n))
+       // {
         if(root == null)
 	    {
             root = new BSTNode(n);
 		    return;
 	    }
 		insert(n, root);
+    }
+       // }
 	}
 	private void insert(Integer n, BSTNode root)
 	{
@@ -70,10 +79,6 @@ public class MyBST
 			}
 			else
 			{
-				if(root.val == n)
-				{
-					return;
-				}
 				if (root.right == null)
 				{
                    root.right = new BSTNode(n);
@@ -151,11 +156,11 @@ public class MyBST
 	 * doesn't exist in the tree itself.
 	 * @param n
 	 */
-	public void delete(Integer n)
+	public BSTNode delete(Integer n)
 	{
-		delete(n, root);
+		return delete(n, root);
 	}
-	private void delete(Integer n, BSTNode root)
+	private BSTNode delete(Integer n, BSTNode root)
 	{
 	    if (root == null) 
 	    {
@@ -165,13 +170,13 @@ public class MyBST
 	   {
             if (root.right != null && root.left != null) 
 	    {
-                root.val = getSuccessor(root.right);
+                root.val = getNext(root.right);
                 return root;
             }
 	   
             if (root.left != null)
 	    {
-		    return node.left;
+		    return root.left;
 	    }
             if (root.right != null)
 	    { 
@@ -182,8 +187,17 @@ public class MyBST
         root.right = delete(n, root.right);
         root.left = delete(n, root.left);
         return root;
-
-		
+	}
+	public Integer getNext(BSTNode root)
+	{
+		if(root.left == null)
+		{
+			Integer min = root.val;
+			delete(root.val, root);
+			
+			return min;
+		}
+		return getNext(root.left);
 	}
 	public void inOrder()
 	{
