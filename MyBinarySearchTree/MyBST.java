@@ -18,7 +18,7 @@ public class MyBST
 		public BSTNode(Integer val) 
 		{
 			this.val = val;
-			left = right = null;
+			left = right = null; //initializing left and right sides
 		}
 		@Override
 		public String toString() 
@@ -49,7 +49,7 @@ public class MyBST
 	 */
 	public void insert(Integer n)
 	{
-    if(contains(n))
+    if(contains(n)) //if it exists we don't add
     {
       return;
     }
@@ -59,7 +59,7 @@ public class MyBST
        // {
         if(root == null)
 	    {
-            root = new BSTNode(n);
+            root = new BSTNode(n); //makes a new one of the tree doesn't exist
 		    return;
 	    }
 		insert(n, root);
@@ -68,7 +68,7 @@ public class MyBST
 	}
 	private void insert(Integer n, BSTNode root)
 	{
-		if(n < root.val)
+		if(n < root.val) // if root is less then the val add to left side
 		{
 	        if (root.left == null)
 		    {
@@ -77,7 +77,7 @@ public class MyBST
             }
             	insert(n, root.left);
 			}
-			else
+			else //else add to right side
 			{
 				if (root.right == null)
 				{
@@ -99,20 +99,20 @@ public class MyBST
     }
     private boolean contains(BSTNode root, Integer n) 
 	{
-        if (root == null) 
+        if (root == null) //if it doesn't exist false
         {
         	return false;
         }
-        if (root.val.equals(n))
+        if (root.val.equals(n)) //if exists true
         {
         	return true;
         }
-       	return contains(root.left, n) || contains(root.right, n);
+       	return contains(root.left, n) || contains(root.right, n); //loop through until we find it
     }
 	/**
 	 * Returns the largest value in the tree,
 	 * or null if the tree is empty
-	 * @return
+	 * @return max
 	 */
 	public Integer getMax()
 	{
@@ -124,7 +124,7 @@ public class MyBST
 	}
 	private Integer getMax(BSTNode root)
 	{
-		if(root.right == null)
+		if(root.right == null) //loops right until we stop for the max
 		{
 			return root.val;
 		}
@@ -133,7 +133,7 @@ public class MyBST
 	/**
 	 * Returns the smallest value in the tree,
 	 * or null if the tree is empty
-	 * @return
+	 * @return min
 	 */
 	public Integer getMin()
 	{
@@ -145,60 +145,73 @@ public class MyBST
 	}
 	public Integer getMin(BSTNode root)
 	{
-		if(root.left == null)
+		if(root.left == null) //loops left till we find the min
 		{
 			return root.val;
 		}
 		return getMin(root.left);
+	}
+	public void delete(Integer n) 
+	{
+		this.root = this.delete(this.root, n);
 	}
 	/**
 	 * Delete a node in the tree with value n. Does nothing if n
 	 * doesn't exist in the tree itself.
 	 * @param n
 	 */
-	public BSTNode delete(Integer n)
+	private BSTNode delete(BSTNode root, Integer n) 
 	{
-		return delete(n, root);
+		if(root == null) //if root doesnt exist we good
+		{
+			return root;
+		}
+		else if(n < root.val) //if root is less than the root val move left
+		{
+			root.left = delete(root.left, n);
+		}
+		else if(n > root.val) //else move right
+		{
+			root.right = delete(root.right, n);
+		}
+		else //check if the root has child nodes
+		{
+			if(root.left == null) 
+			{
+				return root.right;
+			}
+			else if(root.right == null)
+			{
+				return root.left;
+			}
+			else 
+			{
+				root.val = getNext(root.right); //get successor node to change to
+				root.right = delete(root.right, root.val); //delete the right largest value
+			} 
+		}
+		return root;
 	}
-	private BSTNode delete(Integer n, BSTNode root)
-	{
-	    if (root == null) 
-	    {
-		return null;
-	    }
-           if (root.val.equals(n)) 
-	   {
-            if (root.right != null && root.left != null) 
-	    {
-                root.val = getNext(root.right);
-                return root;
-            }
-	   
-            if (root.left != null)
-	    {
-		    return root.left;
-	    }
-            if (root.right != null)
-	    { 
-		    return root.right;
-	    }
-            return null;
-        }
-        root.right = delete(n, root.right);
-        root.left = delete(n, root.left);
-        return root;
-	}
+	/**
+	 * Gets the successor root to put in place to shift over
+	 * the elements
+	 * @param root
+	 * @return
+	 */
 	public Integer getNext(BSTNode root)
 	{
 		if(root.left == null)
 		{
 			Integer min = root.val;
-			delete(root.val, root);
+			delete(root.val); 
 			
-			return min;
+			return min; //returns successor node
 		}
 		return getNext(root.left);
 	}
+	/**
+	 * Prints out the tree in a in a specific format ex. [x,y,z..etc]
+	 */
 	public void inOrder()
 	{
 		System.out.print("[");
@@ -222,6 +235,9 @@ public class MyBST
 		}
 		inOrder(root.right);
 	}
+	/**
+	 * Prints out the tree in a tree like way
+	 */
 	public void print()
 	{
 		print(root, 0);
@@ -237,6 +253,11 @@ public class MyBST
 		System.out.println(helpIndent(level) + root.val);
 		print(root.left, level +1);
 	}
+	/**
+	 * Indents the actual toString >>notes - I forgot that \t exists...
+	 * @param level - the level of the tree
+	 * @return the indented spaces
+	 */
 	public String helpIndent(int level)
 	{
 		int tab = 4;
