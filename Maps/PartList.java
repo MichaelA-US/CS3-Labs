@@ -4,16 +4,27 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
 import static java.lang.System.*;
-
+/**
+ * This class implements methods to read the file and print out
+ * a string representation of it
+ * @author Michael
+ *
+ */
 public class PartList
 {
 	private TreeMap<Part, Integer> partsMap;
-
+	/**
+	 * Basic constructor that initalizes the map to a treemap
+	 */
 	public PartList()
 	{
 		partsMap = new TreeMap<Part, Integer>();
 	}
-
+	/**
+	 * Secondary constructor that receives the file
+	 * and puts it into the map itself
+	 * @param fileName - the file to read
+	 */
 	public PartList(String fileName)
 	{
 		this();
@@ -53,7 +64,10 @@ public class PartList
 			//no code needed here
 		}
 	}
-
+	/**
+	 * Prints out the map in the way that
+	 * they want it
+	 */
 	public String toString()
 	{
 		String output="";
