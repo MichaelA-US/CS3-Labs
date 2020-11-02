@@ -17,6 +17,5 @@ public class RelativesRunner
 		}
 		System.out.println(rel);
 		String person = file.next();
-		System.out.println(person + " is related to " + rel.getRelatives(person));
 	}
 }
