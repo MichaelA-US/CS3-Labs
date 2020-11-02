@@ -5,24 +5,39 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
 import static java.lang.System.*;
+/**
+ * This class implements multiple methods to be able to create 
+ * a statistical representation of histogram with a given set of data
+ * @author Michael
+ *
+ */
 public class Histogram
 {
 	private Map<String,Integer> histogram;
 	private String sent = "";
+	/**
+	 * Basic constructor that initalizes the sent data
+	 */
 	public Histogram()
 	{
 		//call setSentence
 		setSentence();
 		sent = "";
 	}
-
+	/**
+	 * SEcondary constructor that sets the sent data to the sentSentence
+	 * @param sent - the data
+	 */
 	public Histogram(String sent)
 	{
 		//call setSentence
 		setSentence();
 		this.sent = sent;
 	}
-	
+	/**
+	 * Stores the actual data into a tree map to aid
+	 * in visually showing it with *s
+	 */
 	public void setSentence()
 	{
 		histogram = new TreeMap<String,Integer>();
@@ -36,7 +51,11 @@ public class Histogram
 			histogram.put(data[i],histogram.get(data[i]) + 1);
 		}
 	}
-
+	/**
+	 * Returns a string representation of the histogram using
+	 * the *s to represent the data
+	 * @return a string representation of the histogram
+	 */
 	public String toString()
 	{
 		String output="";

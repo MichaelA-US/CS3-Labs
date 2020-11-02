@@ -4,16 +4,27 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
 import static java.lang.System.*;
-
+/**
+ * This class implements multiple methods
+ * to have a set of acronyms and it in actual words
+ * @author Michael
+ *
+ */
 public class Acronyms
 {
 	private Map<String,String> acronymTable;
-
+	/**
+	 * Basic constructor that initalizes the map
+	 * into a a tree map
+	 */
 	public Acronyms()
 	{
 		acronymTable = new TreeMap<String, String>();
 	}
-
+	/**
+	 * Stores the entries given of the acronyms
+	 * @param entry - the entires to store
+	 */
 	public void putEntry(String entry)
 	{
 		String[] acros = entry.split(" - ");
@@ -21,7 +32,13 @@ public class Acronyms
 		String value = acros[1];
 		acronymTable.put(key, value);
 	}
-
+	/**
+	 * Converts the acronyms into a word format, makes
+	 * sure that if it has a period it changes it so that we can
+	 * still check the format
+	 * @param sent - the word to check for
+	 * @return the convertd acronyms
+	 */
 	public String convert(String sent)
 	{
 		Scanner chop = new Scanner(sent);
@@ -44,7 +61,10 @@ public class Acronyms
 		}
 		return output;
 	}
-
+	/**
+	 * Prints out a string representation of the acronyms to word format
+	 * with all its glory
+	 */
 	public String toString()
 	{
 		return acronymTable.toString().replaceAll(",","\n");
