@@ -1,11 +1,9 @@
 
+import java.io.*;
+import java.util.*;
 
-import java.io.File;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
-
-public class BoggleSolver {
+public class BoggleSolver 
+{
 	private Set<String> dictionary;
 	private Set<String> words;
 
