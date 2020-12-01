@@ -58,6 +58,16 @@ public class BacktrackingProblems
 			campsiteHelper(x, y, "", 0, 0);
 		}
 	}
+        /**
+	*Recursive campsite helper method that goes through each coordinate possibility while adding it to the coordinates
+	* then checking if they are equal and we can stop
+	*@param x x coordinate
+	*@param y y coordinate
+	*@param s string to append possible directions
+	*@param c x val count for E
+	*@paeam c1 y val count for N
+	*
+	*/
 	private static void campsiteHelper(int x, int y, String s, int c, int c1)
 	{
 		//c is the x value count for "E"
@@ -78,6 +88,13 @@ public class BacktrackingProblems
 			campsiteHelper(x, y, s + "NE ", c + 1, c1 + 1);
 		}
 	}
+	/**
+	* Gets the max possible combination number in a list given between all the numbers
+	* that is less than the limit
+	*@param nums list of numbers
+	*@param limit themax sum we are allowedto reach
+	*@return int the max sum
+	*/
 	public static int getMax(List<Integer> nums, int limit)
 	{
 		if(nums.size() == 0 || limit <= 0)
@@ -93,6 +110,14 @@ public class BacktrackingProblems
 			return maxArr[0];
 		}
 	}
+	/**
+	* Get max helper method  that recursively adds rhe  nums to the arraylist and goes through all the combinations 
+	* until we are left with the max that is less thanor equal to rhe limit
+	*@param nums the list of numbers
+	*@param limit themax sum we can reach
+	*@param sum the actual sum we arechecking rightnow
+	*@param maxArr the max sum
+	*/
 	public static void getMaxHelper(ArrayList<Integer> nums, int limit, int sum, int[] maxArr)
 	{
 		//System.out.println(nums);
@@ -111,8 +136,8 @@ public class BacktrackingProblems
 	/**
 	 * Return the number of different way you can make change
 	 * 
-	 * @param amount
-	 * @return
+	 * @param amount - amountof money to make changefor
+	 * @return the number of wayswe can make change for it
 	 */
 	public static int makeChange(int amount) 
 	{
@@ -120,7 +145,15 @@ public class BacktrackingProblems
 		ArrayList<Integer> coins = new ArrayList<>();
 		coins.add(1); coins.add(5); coins.add(10); coins.add(25); 
 		return makeChangeHelper(coins, currIndex, amount);
-	} 
+	}
+	/**
+	* Make change helper method that recursively gets all the possible combinatuons of the coins by iterating
+	* through the list and finding whether the possibility is able
+	*@param coins - basic US currency coins to check combinations for
+	*@param currIndex the current index of the coins in the list
+	*@param currAmount - the current amount of couns we have left
+	*@return the number of combinations
+	*/
 	public static int makeChangeHelper(ArrayList<Integer> coins, int currIndex, int currAmount)
 	{
 		if(currAmount == 0)
@@ -135,6 +168,12 @@ public class BacktrackingProblems
 		n1 += makeChangeHelper(coins, currIndex-1, currAmount);
 		return n1;
 	}
+	/**
+	 * Return the number of different way you can make change
+	 * 
+	 * @param amount - amountof money to make changefor
+	 * @return the number of wayswe can make change for it for each coin
+	 */
     public static void makeChangeCoinCount(int amount) 
     {
     	int i = 0;
@@ -144,6 +183,18 @@ public class BacktrackingProblems
 		ArrayList<Integer> c = new ArrayList<Integer>();
         makeChangeCoinCountHelper(c, coins, amount, tot, i, 0, 0, 0, 0);
     }
+	/**
+	* Make change helper method that recursively gets all the possible combinatuons of the coins by getting rach amountfor the coins
+	* through the list and finding whether the possibility is able
+	*@param coins - basic US currency coins and each possibility
+	*@param tot the current total of the coins in the list
+	*@param amount - the current amount of couns we have left
+	*@param i itterator value
+	* @param p pennies
+	*@param n nickles
+	*@param d dimes
+	*@param q quarters
+	*/
     public static void makeChangeCoinCountHelper(ArrayList<Integer> c, ArrayList<Integer> coins, int amount, int tot, int i, int p, int n, int d, int q) {
         if (tot > amount)
         {
@@ -179,7 +230,13 @@ public class BacktrackingProblems
         }
         makeChangeCoinCountHelper(c, coins, amount, tot + coins.get(i), i, p, n, d, q);
     }
-
+        /**
+	* Determines the longest common subsequence between the two strings by checking their lengths
+	* and recursively checking through each partof the string and comparing the two subsequences
+	* @param a string 1
+	*@param b string 2
+	*@return the largest common subsequence
+	*/
 	public static String longestCommonSub(String a, String b)
 	{
 	    int s1 = a.length();
