@@ -1,6 +1,14 @@
 import java.util.*;
+/**
+* This class implements multiple backtracking problems to help improve on the topic.
+* @author Michael
+*/
 public class BacktrackingProblems
 {
+	/**
+	* Method that climbs stairs depending on number of steps taken and finds all combinations.
+	* @parm steps - amount of steps to take at the start
+	*/
 	public static void climbStairs(int steps)
 	{
 		if(steps == 0)
@@ -12,6 +20,12 @@ public class BacktrackingProblems
 			climbStairsHelper(steps, "", 0);
 		}
 	}
+	/**
+	* Climb stairs helper method that recursively adds each steps and make sure that the last comma is not printed.
+	*@param steps - steps given
+	*@param s - string to append stairs to
+	*@param n - keeps track of number of stairs
+	*/
 	private static void climbStairsHelper(int steps, String s, int n)
 	{
 		if(n == steps)
@@ -28,6 +42,11 @@ public class BacktrackingProblems
 			climbStairsHelper(steps, s + 2 + ", ", n + 2);
 		}
 	}
+	/**
+	* Recursively gets each direction to a campsite with North and East
+	* @param x - x coordinate
+	* @param y - y coordinate
+	*/
 	public static void campsite(int x, int y)
 	{
 		if(x == 0 && y == 0)
