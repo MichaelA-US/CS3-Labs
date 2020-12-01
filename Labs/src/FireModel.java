@@ -20,19 +20,32 @@ public class FireModel
         myView.updateView(myGrid);
     }
     
-
+    /**
+    * Calls the spread fire
+    * method
+    */
     public void solve()
     {
         // student code here
         myView.updateView(myGrid);
     	spreadFire();
     }
+    /**
+    * Checks if the index we are trying to check is in bounds 
+    * @param a the xindex
+    * @parwm b the y index
+    */
     public boolean inBounds(int a, int b)
     {
     	int rl = myGrid[0].length;
     	int l = myGrid.length;
     	return a < 0 || b < 0 || a >= rl || b >= l;
     }
+    /**
+    * Spread fire method that loops through the grie and recursively calls the spread fire helper methid
+    * then checksif each at the first row is burning and that dtermines if rhet are in trouble
+    * 
+    */
     public void spreadFire()
     {
     	int cl = myGrid[myGrid.length - 1].length;
@@ -54,6 +67,12 @@ public class FireModel
          System.out.println("The town of Onett is safe.");
          JOptionPane.showMessageDialog(null, "The town of Onett is safe.");
     }
+    /**
+    * Spread fire helper method that recursively checks each grid point to see if they aregreen and sets it to be  on fire
+    * and makes sure to go through each possible index
+    *@param a the x coord
+    *@paeam b the y coord
+    */
     public void spreadFireHelp(int a, int b)
     {
         if (inBounds(a, b)) 
